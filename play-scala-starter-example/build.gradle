@@ -24,7 +24,6 @@ model {
 
 
 
-
 dependencies {
     play "com.typesafe.play:play-guice_$scalaVersion:$playVersion"
     play "com.typesafe.play:play-logback_$scalaVersion:$playVersion"
@@ -46,10 +45,7 @@ repositories {
     }
 }
 
-task debugPlayBinary {
-    doLast {
-        def runPlayTask = tasks.findByName('runPlayBinary')
-        runPlayTask.forkOptions.jvmArgs = ['-Xdebug', '-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=9999']
-        runPlayTask.run()
-    }
+tasks.withType(PlayRun) {
+    forkOptions.jvmArgs = ['-Xdebug',
+                           '-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=9999']
 }

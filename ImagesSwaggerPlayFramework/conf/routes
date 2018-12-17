@@ -1,0 +1,15 @@
+GET        /                    controllers.HomeController.index
+
+# Images
+POST       /image              controllers.ImagesController.addImage
+DELETE     /image/:imageID     controllers.ImagesController.deleteImage(imageID:String)
+GET        /image/:imageID     controllers.ImagesController.getImage(imageID:String)
+PUT        /image/:imageID     controllers.ImagesController.updateImage(imageID:String)
+GET        /image/all/:pages   controllers.ImagesController.getImages(pages:String)
+
+# Map static resources from the /public folder to the /assets URL path
+GET        /assets/*file        controllers.Assets.at(path="/public", file)
+
+GET        /swagger.json        controllers.ApiHelpController.getResources
+GET        /docs/               controllers.Assets.at(path="/public/swagger",file="index.html")
+GET        /docs/*file          controllers.Assets.at(path="/public/swagger",file)
