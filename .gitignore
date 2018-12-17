@@ -10,6 +10,7 @@
 */project/**
 
 
+.idea/.name
 .idea/*.xml
 .idea/**/*.xml
 ./.idea/compiler.xml
@@ -23,4 +24,5 @@ play-scala-starter-example/.idea
 play-scala-starter-example/project
 play-scala-starter-example/target
 play-scala-starter-example/build
+play-scala-starter-example/.gradle
 
