@@ -42,12 +42,11 @@ remember that all api rest full endpoints are described in:
 #### Cassandra 
 
 This application is going to create the cassandra keyspace and their tables using cassandra Phantom
-framwork.
+framwork. for more information about cassandra and how to install and use it please refere to : 
+
+https://github.com/Thor-tech-of-metal/repo-it-notes/tree/master/my-notes/cassandra
 
 
 
-COMPLETAR COMO HACER STTART DE CASSANDRA
-
-https://www.howtoforge.com/tutorial/how-to-install-apache-cassandra-on-centos-7/
 
 
