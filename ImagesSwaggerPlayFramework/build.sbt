@@ -30,6 +30,7 @@ libraryDependencies ++= {
 lazy val root = (project in file("."))
   .enablePlugins(PlayScala)
   .settings(
-    name := """ImagesSwaggerPlayFramework"""
+    name := """ImagesSwaggerPlayFramework""",
+    version := "0.1"
   )
 

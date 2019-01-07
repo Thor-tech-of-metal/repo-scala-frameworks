@@ -39,6 +39,40 @@ remember that all api rest full endpoints are described in:
 
 * ImagesSwaggerPlayFramework/conf/routes
 
+
+#### Docker
+
+Run the following from your project root directory.  
+
+1) The command will create a docker image and tag it using name and version
+2) It will run the docker image using the tag name 
+3) It will find the dcoker ip machine.
+4) It will excute the bash command line of the  docker image. 
+
+show docker containers
+docker ps -a
+
+show images 
+docker images 
+
+
+> **_images:v1_** 
+
+```aidl
+
+    1) docker build -t images:v1 .
+    
+    2) docker run images:v1 -p 9000:9000 
+    
+    3) docker inspect --format '{{ .NetworkSettings.IPAddress }}' $(docker ps -q)
+    
+    4) docker exec -it  images:v1  bash
+```
+
+https://github.com/tianhao-au/docker-scala-play/blob/master/project/build.properties
+
+https://github.com/dpfeiffer/play-docker-showcase/blob/master/build.sbt
+
 #### Cassandra 
 
 This application is going to create the cassandra keyspace and their tables using cassandra Phantom
