@@ -30,14 +30,7 @@ Read the following link to setup a remote debug.
 
 https://stackoverflow.com/questions/21114066/attach-intellij-idea-debugger-to-a-running-java-process
 
-#### Swagger
 
-Use the following url to see the swagger docs. http://localhost:9000/docs/#/
-
-
-remember that all api rest full endpoints are described in: 
-
-* ImagesSwaggerPlayFramework/conf/routes
 
 
 Docker
@@ -94,6 +87,30 @@ Run the following from your project root directory.
     5) docker exec -it  [CONTAINDER_ID]   bash
 
 ```
+
+
+Swagger
+======
+
+
+Remember that all api rest full endpoints are described in: 
+
+* ImagesSwaggerPlayFramework/conf/routes
+
+
+#### 1) Swagger from local machine without docker 
+Use the following url to see the swagger docs if you are running local without docker
+
+http://localhost:9000/docs/#/
+
+#### 2) Swagger from local machine docker 
+
+* Use the following url to see the swagger docs if you are running  without docker
+
+http://[dockerIP]:9000/docs/#/
+
+
+* Comple the Swagger base with http://[dockerIP]:9000/swagger.json
 
 
 
