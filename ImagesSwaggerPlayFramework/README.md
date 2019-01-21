@@ -43,6 +43,25 @@ remember that all api rest full endpoints are described in:
 Docker
 ======
 
+#### 1) Build a cassandra local image.
+
+Please refer to the section [docker-cassandra](docker-cassandra/run_cassandra_in_docker.md "docker-cassandra")
+
+In this section we created a cassandra Db inside docker and we named it: **cassandra**
+Then we will link the docker application image with this created docker images called: **cassandra** 
+
+#### Cassandra 
+
+This application is going to create the cassandra keyspace and their tables using cassandra Phantom
+framwork. 
+
+* Please refer [docker-cassandra](docker-cassandra/run_cassandra_in_docker.md "docker-cassandra") to the section to bash cassandra docker image 
+
+* Please refer [docker-cassandra](docker-cassandra/run_cassandra_in_docker.md "docker-cassandra") to the section to see cassandra logs
+
+
+#### 2) Build the application in docker. 
+
 There is a project/Docker file which contains all docker statements to 
 * add project files in the docker volume 
 * compile the project and build target
@@ -53,16 +72,11 @@ There is a project/Docker file which contains all docker statements to
 Run the following from your project root directory.  
 
 1) The command will create a docker image and tag it using name and version
-2) It will run the docker image using the tag name 
-3) It will find the dcoker ip machine.
+2) It will run the docker image using the tag name and link it with to the  **cassandra** docker container created previously
+3) It will find the docker ip machine.
 4) It will print all active containers, from there you can get your IMAGE_ID and CONTAINER_ID
 5) It will execute the bash command line of the  docker image. 
 
-show docker containers
-docker ps -a
-
-show images 
-docker images 
 
 
 > **_images:v1_** 
@@ -71,7 +85,7 @@ docker images
 
     1) docker build -t imagesapplication:v1 .
     
-    2) docker run -it imagesapplication:v1 -p 9000:9000 
+    2) docker run --link cassandra  -it imagesapplication:v1 -p 9000:9000  
     
     3) docker inspect --format '{{ .NetworkSettings.IPAddress }}' $(docker ps -q)
     
@@ -81,16 +95,8 @@ docker images
 
 ```
 
-https://github.com/tianhao-au/docker-scala-play/blob/master/project/build.properties
 
-https://github.com/dpfeiffer/play-docker-showcase/blob/master/build.sbt
 
-#### Cassandra 
-
-This application is going to create the cassandra keyspace and their tables using cassandra Phantom
-framwork. for more information about cassandra and how to install and use it please refere to : 
-
-https://github.com/Thor-tech-of-metal/repo-it-notes/tree/master/my-notes/cassandra
 
 
 
