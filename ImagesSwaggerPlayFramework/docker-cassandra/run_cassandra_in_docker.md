@@ -30,6 +30,16 @@ docker run -it --link cassandra --rm cassandra cqlsh cassandra
 docker exec -it cassandra bash
 ```
 
+5) See the container logs using docker logs
+```
+docker logs cassandra
+```
+
+6) get your docker cassandra container external ip 
+```
+docker inspect --format '{{ .NetworkSettings.IPAddress }}' [CONTAINER_ID]
+ ```
+ 
 Configuring Cassandra
 ======================
 

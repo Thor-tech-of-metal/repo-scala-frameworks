@@ -7,14 +7,49 @@
 * Kubernetes 
 
 
+#### 1) Build a cassandra local image.
 
+Please refer to the section [docker-cassandra](docker-cassandra/run_cassandra_in_docker.md "docker-cassandra")
+
+In this section we created a cassandra Db inside docker and we named it: **cassandra**
+Then we will link the docker application image with this created docker images called: **cassandra** 
+
+#### Cassandra 
+
+This application is going to create the cassandra keyspace and their tables using cassandra Phantom
+framwork. 
+
+* Please refer [docker-cassandra](docker-cassandra/run_cassandra_in_docker.md "docker-cassandra") to the section to bash cassandra docker image 
+
+* Please refer [docker-cassandra](docker-cassandra/run_cassandra_in_docker.md "docker-cassandra") to the section to see cassandra logs
+
+* Change your application to use the linked cassandra container ip address.
+
+    Get your docker cassandra container external ip 
+
+    ```docker inspect --format '{{ .NetworkSettings.IPAddress }}' cassandra``` 
+
+* Update conf/application.conf to look like the following    
+  
+```aidl  
+    db {
+      keyspace = "images"
+      preparedStatementCacheSize = 100
+      session {
+        contactPoints = "cassandra"
+        queryOptions {
+          consistencyLevel = "LOCAL_QUORUM"
+        }
+      }
+    }
+```
 #### Build and Run the application 
 
 ```aidl
 
     1) sbt clean compile 
-    
-    2) sbt run
+    2) your docker cassandra container is running if not use refer to Cassandra section.
+    3) sbt run
 ```
 
 #### Run the application in Degug mode
@@ -36,24 +71,24 @@ https://stackoverflow.com/questions/21114066/attach-intellij-idea-debugger-to-a-
 Docker
 ======
 
-#### 1) Build a cassandra local image.
-
-Please refer to the section [docker-cassandra](docker-cassandra/run_cassandra_in_docker.md "docker-cassandra")
-
-In this section we created a cassandra Db inside docker and we named it: **cassandra**
-Then we will link the docker application image with this created docker images called: **cassandra** 
-
-#### Cassandra 
-
-This application is going to create the cassandra keyspace and their tables using cassandra Phantom
-framwork. 
-
-* Please refer [docker-cassandra](docker-cassandra/run_cassandra_in_docker.md "docker-cassandra") to the section to bash cassandra docker image 
-
-* Please refer [docker-cassandra](docker-cassandra/run_cassandra_in_docker.md "docker-cassandra") to the section to see cassandra logs
 
 
-#### 2) Build the application in docker. 
+####  Build the application in docker and use cassandra docker container
+
+* Update conf/application.conf to use the "contactPoints" pointing to the cassandra image  
+  
+```aidl  
+    db {
+      keyspace = "images"
+      preparedStatementCacheSize = 100
+      session {
+        contactPoints = "cassandra"
+        queryOptions {
+          consistencyLevel = "LOCAL_QUORUM"
+        }
+      }
+    }
+```
 
 There is a project/Docker file which contains all docker statements to 
 * add project files in the docker volume 
@@ -80,7 +115,7 @@ Run the following from your project root directory.
     
     2) docker run --link cassandra  -it imagesapplication:v1 -p 9000:9000  
     
-    3) docker inspect --format '{{ .NetworkSettings.IPAddress }}' $(docker ps -q)
+    3) docker inspect --format '{{ .NetworkSettings.IPAddress }}' imagesapplication:v1
     
     4) docker ps -a
      
@@ -103,7 +138,7 @@ Use the following url to see the swagger docs if you are running local without d
 
 http://localhost:9000/docs/#/
 
-#### 2) Swagger from local machine docker 
+#### 2) Swagger from local machine inside a docker container 
 
 * Use the following url to see the swagger docs if you are running  without docker
 
