@@ -36,7 +36,7 @@ framwork.
       keyspace = "images"
       preparedStatementCacheSize = 100
       session {
-        contactPoints = "cassandra"
+        contactPoints = "THE CONTAINER IP ADDRESS"
         queryOptions {
           consistencyLevel = "LOCAL_QUORUM"
         }
